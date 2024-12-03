@@ -1,0 +1,129 @@
+public class Main {
+
+    public static void main(String[] args) {
+        Wizard wizard = new Wizard("Merlin", 100, 10, 5);
+        Warrior warrior = new Warrior("Ragnar", 120,7 , 10);
+        Orc orc = new Orc("Warwick", 140, 8,5 );
+
+        System.out.println(wizard.getName() + "'s health: " + wizard.getHealth());
+        System.out.println(warrior.getName() + "'s health: " + warrior.getHealth());
+        System.out.println(orc.getName() + "'s health: " + orc.getHealth());
+        System.out.println("Game is starting...");
+
+        warrior.setHealth(wizard);
+        System.out.println(wizard.getName() + " attacks " + warrior.getName() + ". Health updated: " + warrior.getHealth());
+
+        wizard.setHealth(orc);
+        System.out.println(orc.getName() + " attacks " + wizard.getName() + ". Health updated: " + wizard.getHealth());
+
+        orc.setHealth(warrior);
+        System.out.println(warrior.getName() + " attacks " + orc.getName() + ". Health updated: " + orc.getHealth());
+
+        System.out.println("Updated Stats:");
+        System.out.println(wizard.getName() + "'s health: " + wizard.getHealth());
+        System.out.println(warrior.getName() + "'s health: " + warrior.getHealth());
+        System.out.println(orc.getName() + "'s health: " + orc.getHealth());
+    }
+}
+
+class Wizard {
+    private String name;
+    private int health;
+    private int darkMagic;
+    private int wizardArmor;
+
+    public Wizard(String name, int health, int darkMagic, int wizardArmor) {
+        this.name = name;
+        this.health = health;
+        this.darkMagic = darkMagic;
+        this.wizardArmor = wizardArmor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getDarkMagic() {
+        return darkMagic;
+    }
+
+    public void setHealth(Warrior attack) {
+        health = health - (attack.getSword() - wizardArmor);
+    }
+
+    public void setHealth(Orc attack) {
+        health = health - (attack.getAxe() - wizardArmor);
+    }
+
+    public int getHealth() {
+        return health;
+    }
+}
+
+class Warrior {
+    private String name;
+    private int health;
+    private int sword;
+    private int metalArmor;
+
+    public Warrior(String name, int health, int sword, int metalArmor) {
+        this.name = name;
+        this.health = health;
+        this.sword = sword;
+        this.metalArmor = metalArmor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getSword() {
+        return sword;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(Wizard attack) {
+        health = health - (attack.getDarkMagic() - metalArmor);
+    }
+
+    public void setHealth(Orc attack) {
+        health = health - (attack.getAxe() - metalArmor);
+    }
+}
+
+class Orc {
+    private String name;
+    private int health;
+    private int axe;
+    private int hideArmor;
+
+    public Orc(String name, int health, int axe, int hideArmor) {
+        this.name = name;
+        this.health = health;
+        this.axe = axe;
+        this.hideArmor = hideArmor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAxe() {
+        return axe;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(Warrior attack) {
+        health = health - (attack.getSword() - hideArmor);
+    }
+
+    public void setHealth(Wizard attack) {
+        health = health - (attack.getDarkMagic() - hideArmor);
+    }
+}
